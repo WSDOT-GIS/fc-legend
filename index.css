@@ -1,0 +1,8 @@
+﻿body {
+	font-family: 'Arial Narrow', 'Nimbus Sans L', sans-serif;
+}
+table {
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: rgba(0,0,0,0.4) 10px 10px;
+}

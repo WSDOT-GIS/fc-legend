@@ -37,12 +37,12 @@
 	function handleResponse(/**{XMLHttpRequestProgressEvent}*/ e) {
 		var data = JSON.parse(e.target.responseText, legendResponseReviver);
 		var layers = data.layers;
+		var table;
 
 		/**
 		 * @this {Object} - Has table and layer properties.
 		*/
 		var createLegendRow = function (legend) {
-			var table = this.table;
 			var row = table.insertRow(-1);
 			var cell = row.insertCell(-1);
 			var img = document.createElement("img");
@@ -53,7 +53,6 @@
 		};
 
 		function createLayerTable(layer) {
-			var table = document.createElement("table");
 
 			layer.legend.forEach(createLegendRow, {
 				table: table,
@@ -63,8 +62,9 @@
 			document.body.appendChild(table);
 		}
 
+		table = document.createElement("table");
 		layers.filter(function (layer) {
-			return layer.layerName !== "Non State Highway";
+			return !layer.minScale && !layer.maxScale;
 		}).forEach(createLayerTable);
 
 	}
